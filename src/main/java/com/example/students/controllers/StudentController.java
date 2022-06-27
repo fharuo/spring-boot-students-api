@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("students")
-public class StudentsController {
+public class StudentController {
 
     @GetMapping
     public String healthChecker() {
