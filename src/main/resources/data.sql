@@ -1,0 +1,1 @@
+INSERT INTO students VALUE (1, "Fabrício Takaki", "02/17/1995", "fabriciohtakaki@gmail.com", 0, CURRENT_TIMESTAMP, null);
