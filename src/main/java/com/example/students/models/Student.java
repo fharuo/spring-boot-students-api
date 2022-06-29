@@ -28,9 +28,9 @@ public class Student {
 
     private String email;
 
-    @ElementCollection(targetClass = Classes.class)
+    @ElementCollection(targetClass = ClassEnum.class)
     @Enumerated(EnumType.STRING)
-    private Set<Classes> classes;
+    private Set<ClassEnum> classesEnum;
 
     private LocalDateTime createdAt;
 
