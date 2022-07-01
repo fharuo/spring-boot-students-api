@@ -2,10 +2,11 @@ package com.example.students.controllers;
 
 import com.example.students.dtos.StudentDTO;
 import com.example.students.services.StudentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -19,8 +20,22 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<StudentDTO> getAll() {
-        return studentService.getAll();
+    public ResponseEntity<List<StudentDTO>> getAll() {
+        return ResponseEntity.ok(studentService.getAll());
+    }
+
+    @PostMapping
+    public ResponseEntity<StudentDTO> create(@RequestBody StudentDTO studentDTO) {
+        StudentDTO student = studentService.create(studentDTO);
+        return ResponseEntity.created(buildLocation(student.getId())).body(student);
+    }
+
+    private URI buildLocation(Integer id) {
+        return  ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(id)
+                .toUri();
     }
 
 
