@@ -28,6 +28,7 @@ public class Student {
 
     private String email;
 
+    @CollectionTable(name = "students_classes")
     @ElementCollection(targetClass = ClassEnum.class)
     @Enumerated(EnumType.STRING)
     private Set<ClassEnum> classesEnum;

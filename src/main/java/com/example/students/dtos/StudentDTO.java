@@ -1,6 +1,5 @@
 package com.example.students.dtos;
 
-import com.example.students.models.ClassEnum;
 import lombok.Builder;
 import lombok.Data;
 

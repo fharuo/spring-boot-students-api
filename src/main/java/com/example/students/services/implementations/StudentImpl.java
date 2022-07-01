@@ -7,12 +7,8 @@ import com.example.students.repositories.StudentRepository;
 import com.example.students.services.StudentService;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
-
 import static java.time.LocalDateTime.*;
 
 @Service
@@ -55,6 +51,4 @@ public class StudentImpl implements StudentService {
                 .classesEnum(studentDTO.getClassesEnum().stream().map(ClassEnum::valueOf).collect(Collectors.toSet()))
                 .build();
     }
-
-
 }
