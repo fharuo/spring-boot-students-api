@@ -30,6 +30,11 @@ public class StudentController {
         return ResponseEntity.created(buildLocation(student.getId())).body(student);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Integer id) {
+        studentService.deleteById(id);
+    }
+
     private URI buildLocation(Integer id) {
         return  ServletUriComponentsBuilder
                 .fromCurrentRequest()

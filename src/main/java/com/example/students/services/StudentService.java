@@ -10,4 +10,6 @@ public interface StudentService {
     List<StudentDTO> getAll();
 
     StudentDTO create(StudentDTO studentDTO);
+
+    void deleteById(Integer id);
 }

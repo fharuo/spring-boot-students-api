@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +17,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.*;
 
 import static java.time.LocalDate.*;
+import static org.mockito.BDDMockito.willDoNothing;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -33,6 +36,8 @@ public class StudentControllerTest {
 
     @MockBean
     private StudentService service;
+
+    final int EXISTING_ID = 1;
 
     private final ObjectMapper mapper = new ObjectMapper();
 
@@ -78,5 +83,14 @@ public class StudentControllerTest {
                 .andExpect(jsonPath("$.name").value("foo"))
                 .andExpect(jsonPath("$.email").value("bar@gmail.com"))
                 .andExpect(jsonPath("$.classesEnum").isArray());
+    }
+
+    @Test
+    public void shouldDeleteByIdAndReturnNull() throws Exception {
+        willDoNothing().given(service).deleteById(EXISTING_ID);
+
+        mvc.perform(delete("/students/" + EXISTING_ID))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 }
